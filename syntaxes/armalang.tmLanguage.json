@@ -2,45 +2,54 @@
     "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
     "name": "ArmaLang",
     "patterns": [{
-            "include": "#reserved-words"
-        },
-        {
-            "include": "#numbers"
+            "include": "#comment"
         },
         {
             "include": "#operators"
         },
         {
             "include": "#strings"
+        }, {
+            "include": "#numbers"
         },
         {
-            "include": "ctrl-statement"
+
+            "include": "#reserved-words"
+        },
+        {
+            "include": "#ctrl-statement"
         }
+
+
+
+
+
     ],
     "repository": {
         "numbers": {
             "patterns": [{
-                "name": "keyword.other.unit.suffix.integer.armalang",
-                "match": "(^-?[0-9][0-9\\.]+$)"
+                "name": "variable.other.enummember.armalang",
+                "match": "\\b(-?[1-9]+\\d*([.]\\d+)?)$|^(-?0[.]\\d*[1-9]+|0)\\b"
             }]
         },
         "ctrl-statement": {
             "patterns": [{
-                "name": "keyword.control.armalang",
-                "match": "\\b(ilakan|mahed|reje3|3mel|dir|dala)\\b"
+                "name": "entity.name.namespace.armalang",
+                "match": "\\b(ilakan|mahed|reje3)\\b"
 
             }]
         },
         "reserved-words": {
             "name": "entity.name.function.member.armalang",
-            "match": "\\b()\\b"
+            "match": "\\b(3mel|dir|dala)\\b"
         },
         "expressions": {
             "patterns": [
                 { "include": "numbers" },
                 { "include": "reserved-words" },
                 { "include": "strings" },
-                { "include": "paren-expression" }
+                { "include": "paren-expression" },
+                { "include": "ctrl-statement" }
 
             ]
         },
@@ -66,7 +75,31 @@
             }]
         },
         "operators": {
-
+            "patterns": [{
+                    "match": "--",
+                    "name": "keyword.operator.decrement.armalang"
+                },
+                {
+                    "match": "\\+\\+",
+                    "name": "keyword.operator.increment.armalang"
+                },
+                {
+                    "match": "%=|\\+=|-=|\\*=|(?<!\\()/=",
+                    "name": "keyword.operator.assignment.compound.armalang"
+                }
+            ]
+        },
+        "comment": {
+            "patterns": [{
+                "begin": "//",
+                "end": "\\n",
+                "beginCaptures": {
+                    "0": {
+                        "name": "punctuation.definition.comment.armalang"
+                    }
+                },
+                "name": "comment.line.double-slash"
+            }]
         }
     },
     "scopeName": "source.arma"

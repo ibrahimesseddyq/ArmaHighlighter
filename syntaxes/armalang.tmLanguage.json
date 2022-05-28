@@ -1,0 +1,73 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "ArmaLang",
+    "patterns": [{
+            "include": "#reserved-words"
+        },
+        {
+            "include": "#numbers"
+        },
+        {
+            "include": "#operators"
+        },
+        {
+            "include": "#strings"
+        },
+        {
+            "include": "ctrl-statement"
+        }
+    ],
+    "repository": {
+        "numbers": {
+            "patterns": [{
+                "name": "keyword.other.unit.suffix.integer.armalang",
+                "match": "(^-?[0-9][0-9\\.]+$)"
+            }]
+        },
+        "ctrl-statement": {
+            "patterns": [{
+                "name": "keyword.control.armalang",
+                "match": "\\b(ilakan|mahed|reje3|3mel|dir|dala)\\b"
+
+            }]
+        },
+        "reserved-words": {
+            "name": "entity.name.function.member.armalang",
+            "match": "\\b()\\b"
+        },
+        "expressions": {
+            "patterns": [
+                { "include": "numbers" },
+                { "include": "reserved-words" },
+                { "include": "strings" },
+                { "include": "paren-expression" }
+
+            ]
+        },
+        "paren-expression": {
+            "patterns": [{
+                "captures": {
+                    "1": {
+                        "name": "entity.name.function.armalang"
+                    }
+                },
+                "match": "\\b(\\w+)(?:\\s+([-a-zA-Z0-9_]+))?\\s*(\\()",
+                "name": "punctuation.definition.parameters.armalang",
+                "patterns": [{ "include": "#expression" }]
+            }]
+        },
+        "strings": {
+            "name": "string.quoted.double.armalang",
+            "begin": "\"",
+            "end": "\"",
+            "patterns": [{
+                "name": "constant.character.escape.armalang",
+                "match": "\\\\."
+            }]
+        },
+        "operators": {
+
+        }
+    },
+    "scopeName": "source.arma"
+}

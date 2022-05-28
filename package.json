@@ -1,0 +1,25 @@
+{
+    "name": "darija",
+    "displayName": "darija",
+    "description": "Armalang programming language",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.67.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "armalang",
+            "aliases": ["ArmaLang", "armalang"],
+            "extensions": [".darija",".arma"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "armalang",
+            "scopeName": "source.arma",
+            "path": "./syntaxes/armalang.tmLanguage.json"
+        }]
+    }
+}
